@@ -1,174 +1,88 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Citlalli Velasco Calderón | Estética</title>
+    <title>Citlalli Velasco | Spa & Estética</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'brand-gold': '#D4AF37',
-                        'brand-pistachio': '#C1D7AE',
-                        'brand-pistachio-dark': '#8DA875',
-                        'brand-fuchsia': '#D946EF',
-                        'brand-fuchsia-dark': '#A21CAF',
+                        'brand-gold': '#D4AF37', 'brand-pistachio': '#C1D7AE',
+                        'brand-pistachio-dark': '#8DA875', 'brand-fuchsia': '#D946EF',
                     },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Lato"', 'sans-serif'],
-                    }
+                    fontFamily: { serif: ['"Playfair Display"', 'serif'], sans: ['"Lato"', 'sans-serif'] }
                 }
             }
         }
     </script>
-
     <style>
-        /* Animación de Fondo (Orbes flotantes) */
-        @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-            animation: blob 7s infinite;
-        }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-
-        /* Clase Maestra de Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .glass-strong {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-        }
-
-        /* Ondas SVG Animadas */
-        .waves-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-            z-index: 0;
-        }
-        .wave-svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 150px;
-        }
-        .shape-fill {
-            fill: rgba(255, 255, 255, 0.3);
-        }
+        @keyframes blob { 0% { transform: translate(0px, 0px) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } 100% { transform: translate(0px, 0px) scale(1); } }
+        .animate-blob { animation: blob 7s infinite; }
+        .glass { background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .glass-strong { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.8); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-700 font-sans relative overflow-x-hidden min-h-screen">
-
-    <div class="fixed inset-0 w-full h-full overflow-hidden -z-10 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div class="fixed inset-0 w-full h-full -z-10 bg-gradient-to-br from-gray-50 to-gray-100">
         <div class="absolute top-0 -left-4 w-72 h-72 bg-brand-pistachio rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div class="absolute top-0 -right-4 w-72 h-72 bg-brand-gold rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-brand-gold rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob"></div>
     </div>
-
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300">
-        <div class="glass-strong px-6 py-3 flex justify-between items-center shadow-sm">
-            <div class="text-2xl font-serif font-bold text-gray-800">
-                <span class="text-brand-gold">Vital</span>Estética
-            </div>
-            <button class="text-gray-600 focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+    <nav class="fixed w-full z-50 top-0">
+        <div class="glass-strong px-6 py-4 flex justify-between items-center shadow-sm">
+            <div class="text-xl font-serif font-bold text-gray-800"><span class="text-brand-gold">Vital</span>Estética</div>
+            <button onclick="toggleMenu()" class="text-gray-600 p-2"><i class="fas fa-bars text-2xl"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full glass-strong shadow-xl flex flex-col text-center py-4 space-y-4">
+            <a href="#servicios" onclick="toggleMenu()" class="font-bold">Servicios</a>
+            <a href="#galeria" onclick="toggleMenu()" class="font-bold">Resultados</a>
+            <a href="#agenda" onclick="toggleMenu()" class="font-bold text-brand-fuchsia">Agendar Cita</a>
         </div>
     </nav>
-
-    <header class="relative pt-32 pb-20 px-6 flex flex-col items-center text-center z-10">
-        
+    <header class="relative pt-36 pb-20 px-6 flex flex-col items-center text-center z-10">
         <div class="relative w-40 h-40 mb-6 group">
-            <div class="absolute inset-0 bg-brand-gold rounded-full blur opacity-40 group-hover:opacity-75 transition duration-500"></div>
-            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                 alt="Doctora" 
-                 class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-lg">
+            <div class="absolute inset-0 bg-brand-gold rounded-full blur opacity-40"></div>
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-lg">
         </div>
-
-        <h1 class="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-2">
-            Citlalli Velasco Calderón
-        </h1>
-        <p class="text-lg text-brand-pistachio-dark font-light tracking-widest uppercase mb-6">
-            CONSULTORA EN SPA & ESTÉTICA
-        </p>
-
-        <div class="glass p-6 rounded-2xl max-w-lg mx-auto mb-8 transform hover:scale-105 transition duration-300">
-            <p class="text-gray-600 italic">
-                "Tratamientos estéticos avanzados y relajación total. El equilibrio perfecto para resaltar tu belleza natural."
-            </p>
-        </div>
-
-        <a href="#" class="bg-brand-fuchsia hover:bg-brand-fuchsia-dark text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:-translate-y-1 transition duration-300 flex items-center gap-2">
-            <span>Agendar Valoración</span>
-            <i class="fas fa-arrow-right"></i>
+        <h1 class="text-3xl font-serif font-bold text-gray-800 mb-2">Citlalli Velasco C.</h1>
+        <p class="text-sm text-brand-pistachio-dark font-bold tracking-widest uppercase mb-6">Consultora en Spa & Estética</p>
+        <div class="glass p-6 rounded-2xl max-w-lg mx-auto mb-8"><p class="text-gray-600 italic">"Tratamientos estéticos avanzados y relajación total. El equilibrio perfecto para resaltar tu belleza natural."</p></div>
+        <a href="#agenda" class="bg-brand-fuchsia text-white font-bold py-3 px-8 rounded-full shadow-lg flex items-center gap-2">
+            <span>Reserva tu Cita</span><i class="fas fa-calendar-check"></i>
         </a>
     </header>
-
-    <div class="relative h-24 w-full overflow-hidden">
-        <svg class="absolute bottom-0 w-full h-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M0,0V46.29c47,21.5,98,40.5,153,49.5,108,17.7,214-5.2,326-25.2,122-21.8,247-46.8,369-25.2,74,13.1,135,40.1,202,68.1V0Z" fill="rgba(255,255,255,0.4)"></path>
-            <path d="M0,0V15.81C13,36.92,54,72.47,297,55,487,41.28,630,99.28,908,55c161-25.66,236,25.66,292,55V0Z" fill="rgba(255,255,255,0.2)"></path>
-        </svg>
+    <section id="agenda" class="px-6 pb-20">
+        <div class="glass-strong p-6 rounded-3xl max-w-md mx-auto shadow-2xl border-t-4 border-brand-fuchsia text-center">
+            <h3 class="text-2xl font-serif font-bold mb-6">Agenda tu Cita</h3>
+            <form onsubmit="enviarWhatsApp(event)" class="space-y-4 text-left">
+                <input type="text" id="nombre" class="w-full p-3 rounded-lg border focus:outline-none" placeholder="Tu Nombre" required>
+                <select id="servicio" class="w-full p-3 rounded-lg border">
+                    <option>Limpieza Facial Profunda</option>
+                    <option>Estética Integral</option>
+                    <option>Control de Acné</option>
+                </select>
+                <button type="submit" class="w-full bg-brand-fuchsia text-white font-bold py-3 rounded-xl flex justify-center items-center gap-2">
+                    <span>Confirmar por WhatsApp</span><i class="fab fa-whatsapp text-xl"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/528124114941" target="_blank" class="bg-green-500 text-white p-4 rounded-full shadow-2xl flex items-center justify-center animate-bounce">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
     </div>
-
-    <section class="px-6 py-12 relative z-10">
-        <h2 class="text-3xl font-serif text-center font-bold text-gray-800 mb-10">
-            <span class="border-b-2 border-brand-gold pb-1">Mis Servicios</span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            
-            <div class="glass p-6 rounded-2xl relative overflow-hidden group hover:bg-white/40 transition">
-                <div class="absolute -right-6 -top-6 w-20 h-20 bg-brand-pistachio rounded-full opacity-20 blur-xl"></div>
-                <div class="flex items-center gap-4 mb-3">
-                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-gold shadow-sm">
-                        <i class="fas fa-leaf text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800">Limpieza Facial Profunda</h3>
-                </div>
-                <p class="text-gray-600 text-sm">Protocolos personalizados para renovar tu piel y devolverle su vitalidad y frescura.</p>
-            </div>
-
-            <div class="glass p-6 rounded-2xl relative overflow-hidden group hover:bg-white/40 transition">
-                <div class="absolute -right-6 -top-6 w-20 h-20 bg-brand-gold rounded-full opacity-20 blur-xl"></div>
-                <div class="flex items-center gap-4 mb-3">
-                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-brand-fuchsia shadow-sm">
-                        <i class="fas fa-spa text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800">Estética Integral</h3>
-                </div>
-                <p class="text-gray-600 text-sm">Limpiezas profundas, hidratación y corrección de imperfecciones con tecnología suave.</p>
-            </div>
-
-            <div class="glass p-6 rounded-2xl relative overflow-hidden group hover:bg-white/40 transition">
-                <div class="absolute -right-6 -top-6 w-20 h-20 bg-blue-200 rounded-full opacity-20 blur-xl"></div>
-                <div class="flex items-center gap-4 mb-3">
-                    <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-blue-400 shadow-sm">
-                        <i class="fas fa-magic text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800">Control de Acné</h3>
-                </div>
-                <p class="text-gray-600 text-sm">Protocolos homeopáticos para regular el pH y eliminar bacterias sin dañar la barrera cutánea.</p>
-            </div>
-
-
+    <script>
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+        function enviarWhatsApp(e) {
+            e.preventDefault();
+            const url = `https://wa.me/528124114941?text=Hola Citlalli, soy ${document.getElementById('nombre').value}. Quiero agendar: ${document.getElementById('servicio').value}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
